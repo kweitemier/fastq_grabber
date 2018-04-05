@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from os import path  #Importing two methods from os module
 from optparse import OptionParser    #Imports the option parser module
+import sys
 
 ###### OPTIONS and USAGE ######
 parser = OptionParser(usage = """fastq_grabber.py -f FASTQ_FILE -l ID_LIST -o OUTPUT
@@ -25,7 +26,7 @@ not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 Input - A fastq file and a list of fastq IDs.""")
 parser.add_option("-f", action="store", type="string", dest="fastqfile",
-    help="Name of the fastq file.", default="")
+    help='Name of the fastq file. May be "-" for STDIN.', default="")
 parser.add_option("-l", action="store", type="string", dest="listfile",
     help="Name of the list file", default="")
 parser.add_option("-o", action="store", type="string", dest="outname",
@@ -49,7 +50,10 @@ if options.outname == "":
 if path.isfile(options.outname):
     parser.error("""The output filename exists. Please delete it first or \
 choose a new name.""")
-Infile2 = open(options.fastqfile, 'r')
+if options.fastqfile == "-":
+    Infile2 = sys.stdin
+else:
+    Infile2 = open(options.fastqfile, 'r')
 Infile1 = open(options.listfile, 'r')
 Outfile = open(options.outname, 'w')
 
