@@ -30,6 +30,11 @@ parser.add_option("-l", action="store", type="string", dest="listfile",
     help="Name of the list file", default="")
 parser.add_option("-o", action="store", type="string", dest="outname",
     help="Name of the output file.", default="")
+parser.add_option("-c", action="store_true", dest="header", default=False,
+    help="Only match by the first column of the ID? (separator given by -s)")
+parser.add_option("-s", action="store",
+    type="string", dest="separator", default=" ",
+    help="""When used with -c, delimitor for the first column of the ID. Default=" "[space].""")
 (options, args) = parser.parse_args()
 
 # Makes sure all filenames are given
@@ -59,7 +64,11 @@ while Line1:
 # Grab the matching bubbles
 Line2 = Infile2.readline()
 while Line2:
-    TestNum = Line2.strip()
+    if options.header:
+        Fields = Line2.split(options.separator)
+        TestNum = Fields[0]
+    else:
+        TestNum = Line2.strip()
     if TestNum in BubbleDict:
         Outfile.write("%s" % (Line2))
         Line2 = Infile2.readline()
