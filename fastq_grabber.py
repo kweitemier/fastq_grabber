@@ -4,18 +4,18 @@ from optparse import OptionParser    #Imports the option parser module
 import sys
 
 ###### OPTIONS and USAGE ######
-parser = OptionParser(usage = """fastq_grabber.py -f FASTQ_FILE -l ID_LIST -o OUTPUT
+parser = OptionParser(usage = """fastq_grabber.py -f FASTQ_FILE -l ID_LIST -o OUTPUT [-c -s SEPARATOR]
 
 fastq_grabber.py - Outputs fastq sequences with IDs that exactly match
     (including the leading '@') the IDs present in a list. Note that for paired
     end reads your list of IDs will need a separate entry for each member of
-    the pair.
+    the pair. Use the -c flag to match just the first portion of a read ID.
 
                                        by
                                 Kevin Weitemier
-                                 August  2013
+                                  April  2018
 
-Copyright (c) 2013  Kevin Weitemier.
+Copyright (c) 2013,2018  Kevin Weitemier.
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
