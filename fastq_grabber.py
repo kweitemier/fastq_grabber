@@ -78,8 +78,6 @@ while Line2:
         TestNum = Line2.strip()
     if TestNum in BubbleDict:
         Outfile.write("%s" % (Line2))
-        #sys.stdout.write("%s" % (Line2))
-        #sys.stdout.write("Writing")
         Line2 = Infile2.readline()
         Outfile.write("%s" % (Line2))
         Line2 = Infile2.readline()
